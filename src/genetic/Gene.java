@@ -1,6 +1,8 @@
 package genetic;
 
 public class Gene {
+    //TODO: сделать обработку отрицательных значений
+    
     //value storing in Gray code, translated to int as binmary
     private int value;
 
