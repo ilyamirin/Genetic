@@ -13,6 +13,7 @@ public class Chromosome {
 
     public Chromosome(int genNum){
         //TODO: сделать задаваемый диапазон значений
+     /*
         randomizator = new Random();
 
         gens = new ArrayList<Gene>();
@@ -22,7 +23,7 @@ public class Chromosome {
             genNum--;
 
         }//while
-
+*/
     }//constructor
 
     @Override
