@@ -5,8 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Chromosome {
-    private int fitness = 0;
-
+    private Integer fitness = 0;
     private List<Gene> genes = new ArrayList<Gene>();
 
     public List<Integer> getValues() {
@@ -16,9 +15,9 @@ public class Chromosome {
         return result;
     }//getvalues
 
-    private void mutate(double propability) {
+    public void mutate(double probability) {
         for (Iterator<Gene> it = genes.iterator(); it.hasNext();)
-            it.next().mutate(propability);
+            it.next().mutate(probability);
     }//mutate
 
     public Chromosome(int genes) {
@@ -39,11 +38,11 @@ public class Chromosome {
         genes.add(geneNumber, gene);
     }
 
-    public int getFitness() {
+    public Integer getFitness() {
         return fitness;
     }
 
-    public void setFitness(int fitness) {
+    public void setFitness(Integer fitness) {
         this.fitness = fitness;
     }
 
