@@ -2,14 +2,13 @@ package genetic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Chromosome {
     private Integer fitness = 0;
-    private List<Gene> genes = new ArrayList<Gene>();
+    private ArrayList<Gene> genes = new ArrayList<Gene>();
 
-    public List<Integer> getValues() {
-        List<Integer> result = new ArrayList<Integer>();
+    public ArrayList<Integer> getValues() {
+        ArrayList<Integer> result = new ArrayList<Integer>();
         for (Iterator<Gene> it = genes.iterator(); it.hasNext();)
             result.add(it.next().getValue());
         return result;

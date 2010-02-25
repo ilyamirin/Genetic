@@ -14,12 +14,24 @@ public class Genetic {
             it.next().mutate(mutation);
     }//mutate
 
+    public void cross() {
+        //TODO: написать метод скрещивания
+    }
+
     public void select() {
         int intLimit = (int) (limit * chromosomes.size()) + 1;
         Collections.sort(chromosomes, new ChromosomesComparator());
         for(int i = intLimit; i < chromosomes.size(); i++) 
             chromosomes.remove(i);
     }//select
+
+    public void setFitnesses(IGetFitnessObject getFitnessObject) {
+        for (Iterator<Chromosome> it = chromosomes.iterator(); it.hasNext();) {
+            Chromosome chromosome = it.next();
+            chromosome.setFitness(getFitnessObject
+                    .getFitness(chromosome.getValues()));
+        }//for
+    }//getFitnesses
 
     public Genetic(int chromosomes, int genes) {
         for (int i = 0; i < chromosomes; i++)
