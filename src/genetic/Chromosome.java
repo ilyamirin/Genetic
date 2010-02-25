@@ -1,35 +1,39 @@
 package genetic;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 public class Chromosome {
-    private Random randomizator;
-    private List<Gene> gens;
+    private List<Gene> gens = new ArrayList<Gene>();
+    private Random random = new Random();
 
-    private Chromosome(){
+    public List<Integer> getvalues() {
+        List<Integer> result = new ArrayList<Integer>();
+        for (Iterator<Gene> it = gens.iterator(); it.hasNext();) 
+            result.add(it.next().getValue());
+        return result;
+    }//getvalues
+
+    private void mutate(double propability) {
+        for (Iterator<Gene> it = gens.iterator(); it.hasNext();) 
+            it.next().mutate(propability);
+    }//mutate
+
+    public Chromosome(int gens) {
+        for (int i = 0; i < gens; i++)
+            this.gens.add(new Gene());
     }
 
-    public Chromosome(int genNum){
-        //TODO: сделать задаваемый диапазон значений
-     /*
-        randomizator = new Random();
-
-        gens = new ArrayList<Gene>();
-
-        while(genNum > 0){
-            gens.add(new Gene(randomizator.nextInt(100)));
-            genNum--;
-
-        }//while
-*/
-    }//constructor
-
-    @Override
-    public String toString(){
-        //TODO: написать метод, печатающий в консоли гены 
-        return null;
+    public Chromosome(int gens, int maxGeneValue) {
+        for (int i = 0; i < gens; i++)
+            this.gens.add(new Gene(maxGeneValue));
     }
+    
+    public void print(){
+        for (Iterator<Gene> it = gens.iterator(); it.hasNext();)
+            System.out.println(it.next().toString());
+    }//print
 
 }
