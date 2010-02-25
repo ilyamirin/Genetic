@@ -2,10 +2,20 @@ package genetic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
-public class Chromosome {
+public class Chromosome implements Cloneable{
     private Integer fitness = 0;
     private ArrayList<Gene> genes = new ArrayList<Gene>();
+
+    public Chromosome cross(Chromosome partner) throws CloneNotSupportedException {
+        int beakepoint = (new Random()).nextInt(genes.size());
+        //TODO: убедиться что это работет, иначе переопределить метод clone()
+        Chromosome descendant = (Chromosome) this.clone();
+        for(int  i = 0; i < beakepoint; i++) 
+            descendant.setGene(i, partner.getGene(i));
+        return descendant;
+    }//cross
 
     public ArrayList<Integer> getValues() {
         ArrayList<Integer> result = new ArrayList<Integer>();
