@@ -2,18 +2,22 @@ package genetic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
-public class Chromosome implements Cloneable{
+public class Chromosome {
     private Integer fitness = 0;
     private ArrayList<Gene> genes = new ArrayList<Gene>();
 
-    public Chromosome cross(Chromosome partner) throws CloneNotSupportedException {
-        int beakepoint = (new Random()).nextInt(genes.size());
-        //TODO: убедиться что это работет, иначе переопределить метод clone()
-        Chromosome descendant = (Chromosome) this.clone();
-        for(int  i = 0; i < beakepoint; i++) 
-            descendant.setGene(i, partner.getGene(i));
+    //TODO: проангализировать статистически распределение
+    //случайного наследования гнеов
+    public Chromosome cross(Chromosome partner) {        
+        Chromosome descendant = new Chromosome();
+        for(int  i = 0; i < genes.size(); i++) {
+            if(Math.random() < 0.5) {
+                descendant.addGene(this.getGene(i));
+            } else {
+                descendant.addGene(partner.getGene(i));
+            }//else if
+        }//for            
         return descendant;
     }//cross
 
@@ -29,6 +33,9 @@ public class Chromosome implements Cloneable{
             it.next().mutate(probability);
     }//mutate
 
+    public Chromosome() {
+    }
+
     public Chromosome(int genes) {
         for (int i = 0; i < genes; i++)
             this.genes.add(new Gene());
@@ -41,6 +48,10 @@ public class Chromosome implements Cloneable{
 
     public Gene getGene(int geneNumber) {
         return genes.get(geneNumber);
+    }
+
+    public void addGene(Gene gene) {
+        genes.add(gene);
     }
 
     public void setGene(int geneNumber, Gene gene) {
