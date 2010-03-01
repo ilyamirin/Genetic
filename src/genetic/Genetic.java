@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class Genetic {
     private double mutation = 0.1;
-    private double limit = 0.5;
+    private int limit;
     private ArrayList<Chromosome> chromosomes = new ArrayList();
 
     public void mutate() {
@@ -15,13 +15,13 @@ public class Genetic {
     }//mutate
 
     public void cross() {
-        //TODO: написать метод скрещивания
+
     }
 
     public void select() {
-        int intLimit = (int) (limit * chromosomes.size()) + 1;
+        limit = (int) (0.5 * chromosomes.size()) + 1;
         Collections.sort(chromosomes, new ChromosomesComparator());
-        for(int i = intLimit; i < chromosomes.size(); i++) 
+        for(int i = limit; i < chromosomes.size(); i++)
             chromosomes.remove(i);
     }//select
 
