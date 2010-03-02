@@ -4,5 +4,5 @@ import genetic.chromosomes.Chromosome;
 import java.util.List;
 
 public interface ISelectionStrategy {
-    public void selectAndCross(List<Chromosome> chromosomes, int limit);
+    public void select(List<Chromosome> chromosomes, int limit);
 }

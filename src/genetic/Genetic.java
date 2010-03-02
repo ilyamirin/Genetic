@@ -3,6 +3,7 @@ package genetic;
 import genetic.chromosomes.Chromosome;
 import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 //TODO: добавить печать генетики в формате XML
@@ -17,8 +18,15 @@ public class Genetic {
             it.next().mutate(mutation);
     }//mutate
 
+    public void cross () {
+        Collections.shuffle(chromosomes);
+        for(int i = 0; i < limit; i++)
+            chromosomes.add(chromosomes.get(i).cross(chromosomes.get(i+1)));
+        chromosomes.add(chromosomes.get(limit).cross(chromosomes.get(0)));
+    }//cross
+
     public void select() {
-        selectionStrategy.selectAndCross(chromosomes, limit);
+        selectionStrategy.select(chromosomes, limit);
     }//select
 
     public void setFitnesses(IGetFitnessObject getFitnessObject) {
