@@ -1,4 +1,4 @@
-package genetic;
+package genetic.chromosomes;
 
 import java.util.Comparator;
 

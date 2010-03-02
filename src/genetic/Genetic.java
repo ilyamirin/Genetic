@@ -1,28 +1,24 @@
 package genetic;
 
+import genetic.chromosomes.Chromosome;
+import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
+//TODO: добавить печать генетики в формате XML
 public class Genetic {
     private double mutation = 0.1;
     private int limit;
     private ArrayList<Chromosome> chromosomes = new ArrayList();
+    private ISelectionStrategy selectionStrategy;
 
     public void mutate() {
         for (Iterator<Chromosome> it = chromosomes.iterator(); it.hasNext();)
             it.next().mutate(mutation);
     }//mutate
 
-    public void cross() {
-
-    }
-
     public void select() {
-        limit = (int) (0.5 * chromosomes.size()) + 1;
-        Collections.sort(chromosomes, new ChromosomesComparator());
-        for(int i = limit; i < chromosomes.size(); i++)
-            chromosomes.remove(i);
+        selectionStrategy.selectAndCross(chromosomes, limit);
     }//select
 
     public void setFitnesses(IGetFitnessObject getFitnessObject) {
@@ -33,14 +29,26 @@ public class Genetic {
         }//for
     }//getFitnesses
 
-    public Genetic(int chromosomes, int genes) {
+    public Genetic(int chromosomes, int genes,
+            ISelectionStrategy selectionStrategy) {
         for (int i = 0; i < chromosomes; i++)
             this.chromosomes.add(new Chromosome(genes));
+        this.selectionStrategy = selectionStrategy;
     }//constructor
 
-    public Genetic(int chromosomes, int genes, int maxGeneValue) {
+    public Genetic(int chromosomes, int genes, int maxGeneValue,
+            ISelectionStrategy selectionStrategy) {
         for (int i = 0; i < chromosomes; i++)
             this.chromosomes.add(new Chromosome(genes, maxGeneValue));
+        this.selectionStrategy = selectionStrategy;
     }//constructor
+
+    public ISelectionStrategy getSelectionStrategy() {
+        return selectionStrategy;
+    }
+
+    public void setSelectionStrategy(ISelectionStrategy selectionStrategy) {
+        this.selectionStrategy = selectionStrategy;
+    }
 
 }

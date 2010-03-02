@@ -1,5 +1,6 @@
-package genetic;
+package genetic.chromosomes;
 
+import genetic.genes.Gene;
 import java.util.ArrayList;
 import java.util.Iterator;
 

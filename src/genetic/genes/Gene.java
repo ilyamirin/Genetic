@@ -1,4 +1,4 @@
-package genetic;
+package genetic.genes;
 
 import java.util.Random;
 
