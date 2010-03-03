@@ -72,4 +72,8 @@ public class Chromosome {
             System.out.println(it.next().toString());
     }//print
 
+    public int compare(Chromosome chromosome) {
+        return this.fitness.compareTo(chromosome.getFitness());
+    }
+
 }
