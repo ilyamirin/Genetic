@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 //TODO: добавить печать генетики в формате XML
+//TODO: починиить мутацию
 public class Genetic {
     //TODO: сделать мутацию заполянемым
     private double mutation = 1;
@@ -49,16 +50,15 @@ public class Genetic {
         return theBest;
     }
 
-    public ArrayList<Integer> run(IGetFitnessObject getFitnessObject,
+    public Chromosome run(IGetFitnessObject getFitnessObject,
             int steps) {
-        for (int i = 0; i < steps; i++) {
-            System.out.println(i+": "+chromosomes.size());
+        for (int i = 0; i < steps; i++) {            
             setFitnesses(getFitnessObject);
             select();
             cross();
             mutate();
         }
-        return getBest().getValues();
+        return getBest();
     }
 
     public Genetic(int chromosomes, int genes,

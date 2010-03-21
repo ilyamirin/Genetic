@@ -6,7 +6,7 @@ public class Gene {
     private Random random = new Random();
     private Integer value;
 
-    //TODO: написать рабочую мутацию
+    //TODO: починиить мутацию
     public void mutate(double probability) {
         /*
         System.out.print(this.getValue());
