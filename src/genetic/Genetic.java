@@ -5,12 +5,13 @@ import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 
 //TODO: добавить печать генетики в формате XML
 public class Genetic {
     private double mutation = 0.1;
+    //TODO: сделать лимит заполянемым
     private int limit;
+    private int population;
     private ArrayList<Chromosome> chromosomes = new ArrayList();
     private ISelectionStrategy selectionStrategy;
 
@@ -21,9 +22,9 @@ public class Genetic {
 
     public void cross () {
         Collections.shuffle(chromosomes);
-        for(int i = 0; i < limit; i++)
+        for(int i = 0; chromosomes.size() < population; i++)
             chromosomes.add(chromosomes.get(i).cross(chromosomes.get(i+1)));
-        chromosomes.add(chromosomes.get(limit).cross(chromosomes.get(0)));
+        //chromosomes.add(chromosomes.get(limit).cross(chromosomes.get(0)));
     }//cross
 
     public void select() {
@@ -50,10 +51,11 @@ public class Genetic {
     public ArrayList<Integer> run(IGetFitnessObject getFitnessObject,
             int steps) {
         for (int i = 0; i < steps; i++) {
+            System.out.println(i+": "+chromosomes.size());
             setFitnesses(getFitnessObject);
             select();
             cross();
-            mutate();
+            //mutate();
         }
         return getBest().getValues();
     }
@@ -63,6 +65,8 @@ public class Genetic {
         for (int i = 0; i < chromosomes; i++)
             this.chromosomes.add(new Chromosome(genes));
         this.selectionStrategy = selectionStrategy;
+        this.population = chromosomes;
+        this.limit = this.chromosomes.size() / 2;
     }//constructor
 
     public Genetic(int chromosomes, int genes, int maxGeneValue,
@@ -70,6 +74,8 @@ public class Genetic {
         for (int i = 0; i < chromosomes; i++)
             this.chromosomes.add(new Chromosome(genes, maxGeneValue));
         this.selectionStrategy = selectionStrategy;
+        this.population = chromosomes;
+        this.limit = this.chromosomes.size() / 2;
     }//constructor
 
     public ISelectionStrategy getSelectionStrategy() {

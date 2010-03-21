@@ -7,11 +7,10 @@ import java.util.List;
 
 public class RangeStrategy implements ISelectionStrategy {
 
-    public void select(List<Chromosome> chromosomes, int limit) {
-        limit = (int) (0.5 * chromosomes.size());
+    public void select(List<Chromosome> chromosomes, int limit) {        
         Collections.sort(chromosomes, new ChromosomesComparator());
-        for(int i = limit; i < chromosomes.size(); i++)
-            chromosomes.remove(i);
+        for(int i = 0; i < limit; i++)
+            chromosomes.remove(i);        
     }//selectAndCross
 
 }
