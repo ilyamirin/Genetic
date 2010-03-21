@@ -6,14 +6,18 @@ public class Gene {
     private Random random = new Random();
     private Integer value;
 
-    //TODO: проангализировать статистически распределение случайных мутаций генов
+    //TODO: написать рабочую мутацию
     public void mutate(double probability) {
+        /*
+        System.out.print(this.getValue());
         if(Math.random() < probability) 
-            if(random.nextBoolean()) {
+            if(Math.random() < 0.5) {
                 value += random.nextInt(Math.abs(value)+1);
             } else {
                 value -= random.nextInt(Math.abs(value)+1);
             }//else if
+        System.out.println(" "+this.getValue());
+         */
     }//mutate
 
     public Gene() {

@@ -8,7 +8,8 @@ import java.util.Iterator;
 
 //TODO: добавить печать генетики в формате XML
 public class Genetic {
-    private double mutation = 0.1;
+    //TODO: сделать мутацию заполянемым
+    private double mutation = 1;
     //TODO: сделать лимит заполянемым
     private int limit;
     private int population;
@@ -55,7 +56,7 @@ public class Genetic {
             setFitnesses(getFitnessObject);
             select();
             cross();
-            //mutate();
+            mutate();
         }
         return getBest().getValues();
     }
