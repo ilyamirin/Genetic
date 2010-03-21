@@ -5,27 +5,30 @@ import java.util.Random;
 public class Gene {
     private Random random = new Random();
     private Integer value;
+    private Integer capasity;
 
     //TODO: починиить мутацию
+    //TODO: посмотреть как работает мутация для отрицательных чисел
     public void mutate(double probability) {
-        /*
-        System.out.print(this.getValue());
-        if(Math.random() < probability) 
-            if(Math.random() < 0.5) {
-                value += random.nextInt(Math.abs(value)+1);
-            } else {
-                value -= random.nextInt(Math.abs(value)+1);
-            }//else if
-        System.out.println(" "+this.getValue());
-         */
+        //System.out.print(value+" ");
+        for(int i = 0; i < capasity; i++)
+            if(Math.random() < probability)
+                value ^= (int) Math.pow(2, i);
+        //System.out.println(value);
     }//mutate
 
     public Gene() {
-        value = random.nextInt();
+        value = null;
     }
 
     public Gene(int max) {
         value = random.nextInt(max);
+        capasity = 1;
+        int pointer = Math.abs(value);
+        while(pointer >= 2) {
+            pointer /= 2;
+            capasity++;
+        }        
     }
 
     public Integer getValue() {

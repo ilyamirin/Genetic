@@ -10,7 +10,7 @@ import java.util.Iterator;
 //TODO: починиить мутацию
 public class Genetic {
     //TODO: сделать мутацию заполянемым
-    private double mutation = 1;
+    private double mutation = 0.001;
     //TODO: сделать лимит заполянемым
     private int limit;
     private int population;
@@ -50,13 +50,15 @@ public class Genetic {
         return theBest;
     }
 
+    //TODO: добавть остановку при нахождении решения
     public Chromosome run(IGetFitnessObject getFitnessObject,
             int steps) {
-        for (int i = 0; i < steps; i++) {            
-            setFitnesses(getFitnessObject);
+        setFitnesses(getFitnessObject);
+        for (int i = 0; i < steps; i++) {                        
             select();
             cross();
-            mutate();
+            mutate();            
+            setFitnesses(getFitnessObject);
         }
         return getBest();
     }
