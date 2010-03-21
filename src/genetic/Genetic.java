@@ -5,6 +5,7 @@ import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 
 //TODO: добавить печать генетики в формате XML
 public class Genetic {
@@ -28,7 +29,7 @@ public class Genetic {
     public void select() {
         selectionStrategy.select(chromosomes, limit);
     }//select
-
+    
     public void setFitnesses(IGetFitnessObject getFitnessObject) {
         for (Iterator<Chromosome> it = chromosomes.iterator(); it.hasNext();) {
             Chromosome chromosome = it.next();
@@ -36,6 +37,26 @@ public class Genetic {
                     .getFitness(chromosome.getValues()));
         }//for
     }//getFitnesses
+    
+    public Chromosome getBest() {
+        Chromosome theBest = chromosomes.get(0);
+        for (Iterator<Chromosome> it = chromosomes.iterator(); it.hasNext();) {
+            Chromosome chromosome = it.next();
+            if(theBest.compare(chromosome) == -1) theBest = chromosome; 
+        }
+        return theBest;
+    }
+
+    public ArrayList<Integer> run(IGetFitnessObject getFitnessObject,
+            int steps) {
+        for (int i = 0; i < steps; i++) {
+            setFitnesses(getFitnessObject);
+            select();
+            cross();
+            mutate();
+        }
+        return getBest().getValues();
+    }
 
     public Genetic(int chromosomes, int genes,
             ISelectionStrategy selectionStrategy) {
