@@ -49,8 +49,7 @@ public class Genetic {
         }
         return theBest;
     }
-
-    //TODO: добавть остановку при нахождении решения
+    
     public Chromosome run(IGetFitnessObject getFitnessObject,
             int steps) {
         setFitnesses(getFitnessObject);
@@ -59,6 +58,8 @@ public class Genetic {
             cross();
             mutate();            
             setFitnesses(getFitnessObject);
+            Chromosome best = getBest();
+            if(best.getFitness() == Integer.MAX_VALUE) return best;
         }
         return getBest();
     }
