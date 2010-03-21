@@ -14,7 +14,7 @@ public class Gene {
         for(int i = 0; i < capasity; i++)
             if(Math.random() < probability)
                 value ^= (int) Math.pow(2, i);
-        //System.out.println(value);
+        //System.out.println(this.getValue());
     }//mutate
 
     public Gene() {

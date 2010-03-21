@@ -10,7 +10,7 @@ import java.util.Iterator;
 //TODO: починиить мутацию
 public class Genetic {
     //TODO: сделать мутацию заполянемым
-    private double mutation = 0.001;
+    private double mutation = 0.01;
     //TODO: сделать лимит заполянемым
     private int limit;
     private int population;
