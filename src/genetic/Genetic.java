@@ -1,6 +1,7 @@
 package genetic;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import genetic.chromosomes.Chromosome;
 import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
@@ -8,13 +9,19 @@ import java.util.Collections;
 import java.util.Iterator;
 
 //TODO: добавить печать генетики в формате XML
-public class Genetic {    
+public class Genetic {
+
+    @XStreamAsAttribute
     private double mutation = 0.01;
-    
+
+    @XStreamAsAttribute
     private int limit;
+    @XStreamAsAttribute
     private int population;
+
     private ArrayList<Chromosome> chromosomes = new ArrayList();
 
+    @XStreamAsAttribute
     private ISelectionStrategy selectionStrategy;
 
     public void mutate() {
@@ -86,6 +93,8 @@ public class Genetic {
 
     @Override
     public String toString() {
-        return (new XStream()).toXML(this);
+        XStream xstream = new XStream();
+        xstream.autodetectAnnotations(true);
+        return xstream.toXML(this);
     }
 }

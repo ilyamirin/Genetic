@@ -1,10 +1,18 @@
 package genetic.genes;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import java.util.Random;
 
 public class Gene {
+    
+    @XStreamOmitField
     private Random random = new Random();
+
+    @XStreamAsAttribute
     private Integer value;
+
+    @XStreamAsAttribute
     private Integer capasity;
     
     //TODO: посмотреть как работает мутация для отрицательных чисел

@@ -1,11 +1,15 @@
 package genetic.chromosomes;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import genetic.genes.Gene;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Chromosome {
+
+    @XStreamAsAttribute
     private Integer fitness = 0;
+
     private ArrayList<Gene> genes = new ArrayList<Gene>();
 
     //TODO: проангализировать статистически распределение
