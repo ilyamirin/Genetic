@@ -1,5 +1,6 @@
 package genetic;
 
+import com.thoughtworks.xstream.XStream;
 import genetic.chromosomes.Chromosome;
 import genetic.selection.ISelectionStrategy;
 import java.util.ArrayList;
@@ -7,14 +8,13 @@ import java.util.Collections;
 import java.util.Iterator;
 
 //TODO: добавить печать генетики в формате XML
-//TODO: починиить мутацию
-public class Genetic {
-    //TODO: сделать мутацию заполянемым
+public class Genetic {    
     private double mutation = 0.01;
-    //TODO: сделать лимит заполянемым
+    
     private int limit;
     private int population;
     private ArrayList<Chromosome> chromosomes = new ArrayList();
+
     private ISelectionStrategy selectionStrategy;
 
     public void mutate() {
@@ -64,22 +64,16 @@ public class Genetic {
         return getBest();
     }
 
-    public Genetic(int chromosomes, int genes,
-            ISelectionStrategy selectionStrategy) {
-        for (int i = 0; i < chromosomes; i++)
-            this.chromosomes.add(new Chromosome(genes));
-        this.selectionStrategy = selectionStrategy;
-        this.population = chromosomes;
-        this.limit = this.chromosomes.size() / 2;
-    }//constructor
+    public Genetic() {
+    }
 
     public Genetic(int chromosomes, int genes, int maxGeneValue,
-            ISelectionStrategy selectionStrategy) {
+            int populationLimit, ISelectionStrategy selectionStrategy) {
         for (int i = 0; i < chromosomes; i++)
             this.chromosomes.add(new Chromosome(genes, maxGeneValue));
         this.selectionStrategy = selectionStrategy;
         this.population = chromosomes;
-        this.limit = this.chromosomes.size() / 2;
+        this.limit = populationLimit;
     }//constructor
 
     public ISelectionStrategy getSelectionStrategy() {
@@ -90,4 +84,8 @@ public class Genetic {
         this.selectionStrategy = selectionStrategy;
     }
 
+    @Override
+    public String toString() {
+        return (new XStream()).toXML(this);
+    }
 }

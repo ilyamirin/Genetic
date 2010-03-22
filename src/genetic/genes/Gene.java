@@ -15,7 +15,6 @@ public class Gene {
     }//mutate
 
     public Gene() {
-        value = null;
     }
 
     public Gene(int max) {
@@ -32,9 +31,5 @@ public class Gene {
         return value;
     }
     
-    @Override
-    public String toString() {
-        return value.toString();
-    }
 
 }

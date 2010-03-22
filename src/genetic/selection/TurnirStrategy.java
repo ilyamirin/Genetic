@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//TODO: протестировать
 public class TurnirStrategy implements ISelectionStrategy {
 
     //TODO: оптимизировать
